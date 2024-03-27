@@ -1,163 +1,156 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 
-interface FormData {
+interface CardInfo {
   nameOnCard: string;
   cardNumber: string;
-  expirationMonth: string;
-  expirationYear: string;
+  validThru: string;
   cvv: string;
 }
 
 const CardPayment: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const router = useRouter();
+  const [errors, setErrors] = useState<Partial<CardInfo>>({});
+  const [formData, setFormData] = useState<CardInfo>({
     nameOnCard: "",
     cardNumber: "",
-    expirationMonth: "",
-    expirationYear: "",
+    validThru: "",
     cvv: "",
   });
 
-  const router = useRouter();
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateCreditCard(name, value),
+    }));
   };
 
-  const validateCreditCard = (cardNumber: string): boolean => {
-    return /^\d{16}$/.test(cardNumber);
+  const validateCreditCard = (
+    fieldName: string,
+    value: string
+  ): string | undefined => {
+    switch (fieldName) {
+      case "cardNumber":
+        return value.length !== 16
+          ? "Invalid card number format (16 digits)"
+          : undefined;
+      case "nameOnCard":
+        return value.trim() === "" ? "Name on card is required" : undefined;
+      case "validThru":
+        return value.length !== 5 || !value.match(/^\d{2}\/\d{2}$/)
+          ? "Invalid valid thru format (MM/YY)"
+          : undefined;
+      case "cvv":
+        return value.length !== 3 || !value.match(/^\d{3}$/)
+          ? "Invalid CVV format (3 digits)"
+          : undefined;
+      default:
+        return undefined;
+    }
   };
 
-  const handlePayment = () => {
-    if (!validateCreditCard(formData.cardNumber)) {
-      alert("Please enter a valid credit card number.");
-      return;
+  const handlePayment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const errorsList: string[] = [];
+    let isEmptyField = false;
+
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        isEmptyField = true;
+        break;
+      }
     }
 
-    alert("Payment successful!");
-    router.push("/confirmation");
+    if (isEmptyField) {
+      alert(
+        "Please fill in all the information before proceeding with payment."
+      );
+      return;
+    }
+    for (const [key, value] of Object.entries(errors)) {
+      if (value !== undefined) {
+        errorsList.push(value);
+      }
+    }
+
+    if (errorsList.length === 0) {
+      alert("Payment successful!");
+      router.push("/confirmation");
+    } else {
+      console.log(errorsList);
+      alert("Please fill in all fields correctly");
+    }
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="py-4 px-6">
-        <h2 className="text-center text-2xl font-semibold mb-3">
-          Secure payment info
+    <div className=" mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <form className="py-4 px-6" onSubmit={handlePayment}>
+        <h2 className="text-center text-lg font-semibold mb-3">
+          Pay using Credit/ Debit Card
         </h2>
         <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-semibold mb-1">
-            Name on Card
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.nameOnCard}
-            onChange={handleInputChange}
-            placeholder="John Smith"
-            className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="cardNumber"
-            className="block text-sm font-semibold mb-1"
-          >
-            Card Number
-          </label>
           <input
             type="text"
             name="cardNumber"
             value={formData.cardNumber}
             onChange={handleInputChange}
-            placeholder="0000 0000 0000 0000"
-            className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
+            placeholder="Card Number"
+            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
           />
-        </div>
-        <div className="mb-6 flex">
-          <div className="w-1/2 mr-2">
-            <label
-              htmlFor="expirationMonth"
-              className="block text-sm font-semibold mb-1"
-            >
-              Expiration Month
-            </label>
-            <select
-              name="expirationMonth"
-              value={formData.expirationMonth}
-              onChange={handleInputChange}
-              className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
-            >
-              <option value="">Month</option>
-              <option value="01">01</option>
-              <option value="02">02</option>
-              <option value="03">03</option>
-              <option value="04">04</option>
-              <option value="05">05</option>
-              <option value="06">06</option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-            </select>
-          </div>
-          <div className="w-1/2 ml-2">
-            <label
-              htmlFor="expirationYear"
-              className="block text-sm font-semibold mb-1"
-            >
-              Expiration Year
-            </label>
-
-            <select
-              name="expirationYear"
-              value={formData.expirationYear}
-              onChange={handleInputChange}
-              className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
-            >
-              <option value="">Year</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
-              <option value="2028">2028</option>
-              <option value="2029">2029</option>
-              <option value="2030">2030</option>
-            </select>
-          </div>
+          {errors.cardNumber && (
+            <div className="text-xs text-red-600">{errors.cardNumber}</div>
+          )}
         </div>
         <div className="mb-6">
-          <label
-            htmlFor="securityCode"
-            className="block text-sm font-semibold mb-1"
-          >
-            Security Code
-          </label>
           <input
-            type="password"
-            name="securityCode"
-            value={formData.cvv}
+            type="text"
+            name="nameOnCard"
+            value={formData.nameOnCard}
             onChange={handleInputChange}
-            placeholder="123"
-            className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
+            placeholder="Name on card"
+            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
           />
+          {errors.nameOnCard && (
+            <div className="text-xs text-red-600">{errors.nameOnCard}</div>
+          )}
         </div>
-        <div className="text-center">
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-            onClick={handlePayment}
-          >
-            PAY NOW
-          </button>
+
+        <div className="mb-8 flex">
+          <div className="w-1/2 mr-2">
+            <input
+              type="text"
+              name="validThru"
+              value={formData.validThru}
+              onChange={handleInputChange}
+              placeholder="Valid Thru (MM/YY)"
+              className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
+            />
+            {errors.validThru && (
+              <div className="text-xs text-red-600">{errors.validThru}</div>
+            )}
+          </div>
+          <div className="w-1/2 ml-2">
+            <input
+              type="text"
+              name="cvv"
+              value={formData.cvv}
+              onChange={handleInputChange}
+              placeholder="CVV"
+              className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
+            />
+          </div>
         </div>
-      </div>
+
+        {errors.cvv && <div className="text-xs text-red-600">{errors.cvv}</div>}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
+        >
+          Pay Now
+        </button>
+      </form>
     </div>
   );
 };

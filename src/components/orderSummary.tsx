@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ type OrderSummaryItemProps = {
   value?: string;
   children?: React.ReactNode;
   subTotal?: number;
+  context?: "home" | "checkout" | "";
 };
 
 const OrderSummaryItem = (props: OrderSummaryItemProps) => {
@@ -22,7 +23,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-export const CartOrderSummary = ({ subTotal, isCartEmpty }: any) => {
+export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   const router = useRouter();
   const [appliedCoupon, setAppliedCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -53,8 +54,17 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty }: any) => {
   };
 
   const handleCheckout = () => {
-    router.push("/payment");
+    if (context === "home") {
+      router.push("/checkout");
+    } else if (context === "checkout") {
+      router.push("/payment");
+    }
   };
+
+  let buttonText = "Place Order";
+  if (context === "checkout") {
+    buttonText = "Continue";
+  }
 
   let grandTotal = (subTotal || 0) - discount;
 
@@ -67,11 +77,10 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty }: any) => {
 
   return (
     // i want background color to be blue of heading order summary
-    <div className="flex flex-col space-y-8 border-2 rounded-lg w-full items-center border-[#00f0ba] pb-4">
+    <div className="flex flex-col space-y-8 border-2 rounded-lg w-full items-center pb-4">
       <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg ">
-      <h2 className="text-lg font-semibold text-white">Order Summary</h2>
+        <h2 className="text-lg font-semibold text-white">Order Summary</h2>
       </div>
-     
 
       <div className="space-y-6 p-8 w-full">
         <OrderSummaryItem label="Subtotal" value={formatPrice(subTotal || 0)} />
@@ -99,9 +108,9 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty }: any) => {
         <OrderSummaryItem label="Coupon Code">
           <a
             onClick={!isCartEmpty ? handleShowCouponCode : undefined}
-            className="underline cursor-pointer"
+            className="cursor-pointer text-blue-500"
           >
-            Apply coupon code
+            Apply coupon
           </a>
         </OrderSummaryItem>
         {isCouponCodeVisible && (
@@ -140,18 +149,25 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty }: any) => {
           )}
         </div>
       </div>
-      
-      <button
-        className="bg-blue-500 text-white px-6 py-3 mb-6 w-1/2 rounded-md flex items-center justify-center"
+
+      {/* <button
+        className="bg-blue-500 text-white font-semibold px-6 py-3 mb-6 w-1/2 rounded-md flex items-center justify-center"
         disabled={isCartEmpty}
         onClick={handleCheckout}
       >
-        Payment 
+        {buttonText}
         <FaArrowRight className="ml-2" />
-      </button>
-   
+      </button> */}
+      {context !== "" && (
+        <button
+          className="bg-blue-500 text-white font-semibold px-6 py-3 mb-6 w-1/2 rounded-md flex items-center justify-center"
+          disabled={isCartEmpty}
+          onClick={handleCheckout}
+        >
+          {buttonText}
+          <FaArrowRight className="ml-2" />
+        </button>
+      ) }
     </div>
   );
 };
-
-

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import useStore from "../hooks/store";
+import useStore from "../../hooks/store";
 import Image from "next/image";
 import { FaTrash } from "react-icons/fa";
 
@@ -62,7 +62,7 @@ const CartProduct: FC<CartItemProps> = ({
     // </div>
     <div className="flex flex-col md:flex-row justify-between items-center border-b p-3">
       <div className="flex items-center space-x-5 w-full">
-        <div className="border-2 border-[#00f0ba] rounded-lg overflow-hidden p-2">
+        <div className="border-2  rounded-lg overflow-hidden p-2">
           <Image
             className="object-cover"
             src={image}
@@ -83,7 +83,7 @@ const CartProduct: FC<CartItemProps> = ({
           className="text-gray-600 hover:text-red-500 mt-4 md:mt-0 px-2 py-2 w-full"
           onClick={() => removeItemFromCart(id)}
         >
-          <FaTrash />
+          X
         </button>
       </div>
     </div>

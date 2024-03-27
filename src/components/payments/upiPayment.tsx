@@ -2,9 +2,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface UpiInfo {
-    upiId: string;
-    }
-
+  upiId: string;
+}
 
 const UpiPayment: React.FC = () => {
   const router = useRouter();
@@ -16,6 +15,22 @@ const UpiPayment: React.FC = () => {
   const handleUpiPayment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const errorsList: string[] = [];
+
+    let isEmptyField = false;
+
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        isEmptyField = true;
+        break;
+      }
+    }
+
+    if (isEmptyField) {
+      alert(
+        "Please fill in all the information before proceeding with payment."
+      );
+      return;
+    }
     for (const [Key, value] of Object.entries(errors)) {
       if (value != undefined) {
         errorsList.push(value);
@@ -29,13 +44,29 @@ const UpiPayment: React.FC = () => {
     }
   };
 
-  const validateUpiId = (upiId: string): boolean => {
-    return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(upiId);
+  const validateUpiId = (
+    fieldName: string,
+    value: string
+  ): string | undefined => {
+    if (fieldName === "upiId") {
+      if (value.length === 0) {
+        return "UPI ID is required";
+      } else if (
+        !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
+      ) {
+        return "Invalid UPI ID format";
+      }
+    }
+    return undefined;
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateUpiId(name, value),
+    }));
   };
 
   // Function to generate random status (success/fail)
@@ -45,11 +76,11 @@ const UpiPayment: React.FC = () => {
 
   return (
     <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="py-4 px-6">
+      <form className="py-4 px-6" onSubmit={handleUpiPayment}>
         <h2 className="text-center text-2xl font-semibold mb-3">
-          Secure UPI payment info
+          Pay using Credit/ Debit Card
         </h2>
-        <form onSubmit={handleUpiPayment}>
+        <div className="mb-8">
           <label htmlFor="upiId" className="block text-sm font-semibold mb-1">
             UPI ID
           </label>
@@ -59,22 +90,22 @@ const UpiPayment: React.FC = () => {
             value={formData.upiId}
             onChange={handleInputChange}
             placeholder="example@upi"
-            className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
+            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
           />
           {errors.upiId && (
             <p className="text-red-500 text-xs mt-1">{errors.upiId}</p>
           )}
-          <button
+          
+        </div>
+        <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold p-3 rounded-lg"
+            className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
           >
-            Payment
+            Pay Now
           </button>
-        </form>
-      </div>
+      </form>
     </div>
   );
-
-}
+};
 
 export default UpiPayment;
