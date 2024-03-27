@@ -41,11 +41,8 @@ import { useRouter } from "next/navigation";
 import { FaShieldAlt } from "react-icons/fa";
 
 export const Header = () => {
-
- 
-
   return (
-    <header className="p-4 border-b-2">
+    <header className="p-3 border-b-2">
       <div className="flex items-center justify-between">
         <div className="w-14 h-14">
           <Image
@@ -56,21 +53,35 @@ export const Header = () => {
           />
         </div>
         <div className="ml-8 flex space-x-4">
-          <Link href="/" className="text-[#696b79] text-xl ">
+          <Link href="/" className="text-[#696b79] text-xl flex items-center">
             BAG
             {/* dashed line in front of BAG */}
-            <p className="border-b-2 border-blue-500"></p>
+            <Image
+              src="/arrow.png"
+              alt="arrow"
+              width={100}
+              height={50}
+              // className="ml-2"
+            />
           </Link>
           <Link
             href="/checkout"
-            className="text-[#696b79] text-xl "
+            className="text-[#696b79] text-xl flex items-center"
 
             // onClick={() => handleSetActiveLink("/checkout")}
           >
             ADDRESS
+            <Image
+              src="/arrow.png"
+              alt="arrow"
+              width={100}
+              height={50}
+              // className="ml-2"
+            />
           </Link>
           <Link
             href="/payment"
+            className="text-[#696b79] text-xl flex items-center"
 
             // onClick={() => handleSetActiveLink("/payment")}
           >

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import useStore from "./store";
@@ -13,11 +13,10 @@ interface OrderDetails {
     image: string;
   }[];
   paymentMethod: string[];
-
 }
 
 const OrderDetails = () => {
-    const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,9 +45,6 @@ const OrderDetails = () => {
       setLoading(false);
     }
   };
-
- 
-
 
   useEffect(() => {
     fetchDetails();

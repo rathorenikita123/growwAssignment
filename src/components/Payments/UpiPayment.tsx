@@ -40,7 +40,7 @@ const UpiPayment: React.FC = () => {
       console.log(errorsList);
     } else {
       // Redirect to confirmation page with random status
-      router.push('/confirm2');
+      router.push('/order-status');
     }
   };
 

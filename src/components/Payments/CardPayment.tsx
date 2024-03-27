@@ -77,7 +77,7 @@ const CardPayment: React.FC = () => {
 
     if (errorsList.length === 0) {
       alert("Payment successful!");
-      router.push("/confirm2");
+      router.push("/order-status");
     } else {
       console.log(errorsList);
       alert("Please fill in all fields correctly");

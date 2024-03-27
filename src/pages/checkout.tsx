@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { calculateTotalValue } from "../utils/utils";
 import { FaArrowLeft } from "react-icons/fa";
-import { Loader } from "../components/loader";
-import DeliveryDetails from "../components/deliveryAddress";
-import { CartOrderSummary } from "../components/orderSummary";
-import OrderDetails from "../hooks/orderDetails";
+import { Loader } from "../components/Common/Loader";
+import DeliveryDetails from "../components/Checkout/DeliveryAddress";
+import { CartOrderSummary } from "../components/Common/OrderSummary";
+import OrderDetails from "../hooks/useOrderDetails";
 import useStore from "../hooks/store";
-import { Header } from "@/src/components/header";
+// import { Header } from "@/src/components/header";
 
 const Checkout = () => {
   const router = useRouter();
@@ -30,20 +30,19 @@ const Checkout = () => {
 
   return (
     <>
-      <Header />
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-8 lg:py-12">
+      <hr className="w-100 h-5"></hr>
+      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
         <div className="flex flex-col md:flex-row justify-between">
-          <div className="md:w-1/2">
+          <div className="md:w-[60%] mr-4">
             <div className="flex justify-center md:justify-start mb-8">
               <DeliveryDetails onSubmit={() => console.log("Form submitted")} />
             </div>
           </div>
-          <div className="md:w-1/2">
+          <div className="md:w-[40%] ml-4">
             <div className="flex justify-center md:justify-end mb-8">
               <CartOrderSummary
                 subTotal={subTotal}
                 isCartEmpty={hookCart.cart.length > 0 ? false : true}
-                context="checkout"
               />
             </div>
           </div>

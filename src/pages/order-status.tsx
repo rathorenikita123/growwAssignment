@@ -1,9 +1,9 @@
 // Filename: CheckoutPage.tsx
 
 import useCart from "../hooks/store";
-import CartProduct from "../components/cartDetail/cartProduct";
+import CartProduct from "../components/CartDetails/CartProduct";
 import Confirmation from "./confirm";
-import { Header } from "../components/header";
+import { Header } from "../components/Common/Header";
 
 const CheckoutPage = () => {
   // const hookCart = useCart();

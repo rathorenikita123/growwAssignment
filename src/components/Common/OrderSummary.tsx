@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
-import { formatPrice } from "../utils/utils";
+import { formatPrice } from "../../utils/utils";
+import defaultTheme from "@/theme";
 
 type OrderSummaryItemProps = {
   label: string;
@@ -30,6 +31,7 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   const [couponCode, setCouponCode] = useState<string>("");
   const [isCouponCodeVisible, setIsCouponCodeVisible] =
     useState<boolean>(false);
+  const [primary, setPrimary] = useState<string>("");
 
   const applyCoupon = (code: string) => {
     let appliedDiscount = 0;
@@ -75,14 +77,18 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
     grandTotal += deliveryCharge;
   }
 
+  useEffect(() => {
+    setPrimary(defaultTheme?.primary);
+  }, []);
+
   return (
     // i want background color to be blue of heading order summary
-    <div className="flex flex-col space-y-8 border-2 rounded-lg w-full items-center pb-4">
-      <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg ">
-        <h2 className="text-lg font-semibold text-white">Order Summary</h2>
-      </div>
+    <div className="flex flex-col space-y-8 rounded-lg w-full pb-4">
+      {/* <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg "> */}
+      <h2 className="text-lg font-semibold text-black">Order Summary</h2>
+      {/* </div> */}
 
-      <div className="space-y-6 p-8 w-full">
+      <div className="space-y-7 w-full text-md">
         <OrderSummaryItem label="Subtotal" value={formatPrice(subTotal || 0)} />
         <div>
           <OrderSummaryItem
@@ -108,23 +114,23 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
         <OrderSummaryItem label="Coupon Code">
           <a
             onClick={!isCartEmpty ? handleShowCouponCode : undefined}
-            className="cursor-pointer text-blue-500"
+            className={`text-${primary}-500 underline cursor-pointer`}
           >
-            Apply coupon
+            Apply coupon code
           </a>
         </OrderSummaryItem>
         {isCouponCodeVisible && (
-          <div className="flex flex-col items-center w-full space-y-3">
+          <div className="flex flex-row items-center justify-between w-100">
             <input
               type="text"
               placeholder="Enter Coupon Code GROWW10 for 10% discount"
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-              className="border px-2 py-2 w-full"
+              className="border px-2 py-2 w-80 mr-2 text-[10px]"
             />
             <button
               onClick={() => applyCoupon(couponCode)}
-              className="bg-blue-500 text-white px-6 py-3 rounded-md w-1/2"
+              className=" text-blue-500 px-6 py-2 rounded-md mt-0 border border-blue-500 text-[10px]"
             >
               Apply
             </button>
@@ -137,9 +143,9 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
           </p>
         )}
 
-        {appliedCoupon === "" && discount === 0 && (
-          <p className="mt-0 text-red-500">Please enter a valid coupon.</p>
-        )}
+        {/* {appliedCoupon === "" && discount === 0 && (
+        <p className="mt-0 text-red-500">Please enter a valid coupon.</p>
+      )} */}
         <div className="flex justify-between">
           <p className="font-semibold text-lg">Total</p>
           {isCartEmpty ? (
@@ -150,24 +156,14 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
         </div>
       </div>
 
-      {/* <button
-        className="bg-blue-500 text-white font-semibold px-6 py-3 mb-6 w-1/2 rounded-md flex items-center justify-center"
+      <button
+        className="bg-blue-500 text-white px-6 py-3 mb-6 w-full rounded-md flex items-center justify-center"
         disabled={isCartEmpty}
         onClick={handleCheckout}
       >
-        {buttonText}
+        Payment
         <FaArrowRight className="ml-2" />
-      </button> */}
-      {context !== "" && (
-        <button
-          className="bg-blue-500 text-white font-semibold px-6 py-3 mb-6 w-1/2 rounded-md flex items-center justify-center"
-          disabled={isCartEmpty}
-          onClick={handleCheckout}
-        >
-          {buttonText}
-          <FaArrowRight className="ml-2" />
-        </button>
-      ) }
+      </button>
     </div>
   );
 };
