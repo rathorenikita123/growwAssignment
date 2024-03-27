@@ -20,25 +20,18 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phoneNo || !address || !city || !state || !zipCode) {
-      toast.error("Please fill in all fields");
-      console.log(toast.error("Please fill in all fields"));
-      console.log("Please fill in all fields");
-      // alert("Please fill in all fields")
-      toast("Please fill in all fields")
+      alert("Please fill in all fields");
+
       return;
     }
 
-    // toast.success("Address saved!");
-    toast.success('Successfully toasted!')
+    alert("Address saved!");
     console.log("Address saved!");
     onSubmit();
   };
 
   return (
-    <div
-    
-      className="flex flex-col space-y-8 border-2 rounded-lg w-full border-[#00f0ba] pb-4"
-    >
+    <div className="flex flex-col space-y-8 border-2 rounded-lg w-full border-[#00f0ba] pb-4">
       <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg ">
         <h2 className="text-lg font-semibold text-white">Shipping Address</h2>
       </div>
@@ -48,7 +41,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
           Name
           <input
             type="text"
-            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
+            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1"
             placeholder="Enter your full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}

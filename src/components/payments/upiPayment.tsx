@@ -40,7 +40,7 @@ const UpiPayment: React.FC = () => {
       console.log(errorsList);
     } else {
       // Redirect to confirmation page with random status
-      router.push(`/confirmation?status=${getRandomValue()}`);
+      router.push('/confirm2');
     }
   };
 
@@ -51,9 +51,8 @@ const UpiPayment: React.FC = () => {
     if (fieldName === "upiId") {
       if (value.length === 0) {
         return "UPI ID is required";
-      } else if (
-        !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value)
-      ) {
+      } else if (!/^[0-9A-Za-z.-]{2,256}@[A-Za-z]{2,64}$/.test(value)) {
+        console.log(value, "value");
         return "Invalid UPI ID format";
       }
     }
@@ -70,9 +69,9 @@ const UpiPayment: React.FC = () => {
   };
 
   // Function to generate random status (success/fail)
-  const getRandomValue = (): string => {
-    return Math.random() < 0.5 ? "success" : "fail";
-  };
+  // const getRandomValue = (): string => {
+  //   return Math.random() < 0.8 ? "success" : "fail";
+  // };
 
   return (
     <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -95,14 +94,13 @@ const UpiPayment: React.FC = () => {
           {errors.upiId && (
             <p className="text-red-500 text-xs mt-1">{errors.upiId}</p>
           )}
-          
         </div>
         <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
-          >
-            Pay Now
-          </button>
+          type="submit"
+          className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
+        >
+          Pay Now
+        </button>
       </form>
     </div>
   );

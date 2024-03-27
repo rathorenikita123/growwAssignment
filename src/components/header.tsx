@@ -32,7 +32,7 @@
 //     </header>
 //   );
 // };
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -41,13 +41,8 @@ import { useRouter } from "next/navigation";
 import { FaShieldAlt } from "react-icons/fa";
 
 export const Header = () => {
-  const router = useRouter();
 
-  const [activeLink, setActiveLink] = useState("/");
-
-  const handleSetActiveLink = (href: any) => {
-    setActiveLink(href);
-  };
+ 
 
   return (
     <header className="p-4 border-b-2">
@@ -61,40 +56,32 @@ export const Header = () => {
           />
         </div>
         <div className="ml-8 flex space-x-4">
-          <Link href="/"
-            
-              className={`text-xl ${activeLink === "/" ? "border-b-2 border-blue-500 text-blue-500" : "text-[#696b79]"}`}
-              onClick={() => handleSetActiveLink("/")}
-            >
-              BAG
-            
+          <Link href="/" className="text-[#696b79] text-xl ">
+            BAG
+            {/* dashed line in front of BAG */}
+            <p className="border-b-2 border-blue-500"></p>
           </Link>
-          <Link href="/checkout"
-            
-              className={`text-xl ${
-                activeLink === "/checkout" ? "border-b-2 border-blue-500 text-blue-500" : "text-[#696b79]"
-              }`}
-              onClick={() => handleSetActiveLink("/checkout")}
-            >
-              ADDRESS
-            
+          <Link
+            href="/checkout"
+            className="text-[#696b79] text-xl "
+
+            // onClick={() => handleSetActiveLink("/checkout")}
+          >
+            ADDRESS
           </Link>
-          <Link href="/payment"
-              className={`text-xl ${
-                activeLink === "/payment" ? "border-b-2 border-blue-500 text-blue-500" : "text-[#696b79]"
-              }`}
-              onClick={() => handleSetActiveLink("/payment")}
-            >
-              PAYMENT
-            
+          <Link
+            href="/payment"
+
+            // onClick={() => handleSetActiveLink("/payment")}
+          >
+            PAYMENT
           </Link>
         </div>
         <div className="text-[#696b79] text-xl flex items-center ">
-        <FaShieldAlt className="text-green-500"/>
+          <FaShieldAlt className="text-green-500" />
           100% Secure
         </div>
       </div>
     </header>
   );
 };
-

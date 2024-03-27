@@ -22,12 +22,6 @@ const CartProduct: FC<CartItemProps> = ({
   price,
   image,
 }) => {
-  const separatorIndex = title.indexOf(" - ");
-  const extractedTitle =
-    separatorIndex !== -1 ? title.substring(0, separatorIndex) : title;
-  const extractedDescription =
-    separatorIndex !== -1 ? title.substring(separatorIndex + 3) : "";
-
   const removeItemFromCart = useStore((state) => state.removeItemFromCart);
 
   return (
@@ -73,7 +67,7 @@ const CartProduct: FC<CartItemProps> = ({
         </div>
 
         <div className="space-y-1">
-          <div className="font-medium">{extractedTitle}</div>
+          <div className="font-medium">{title}</div>
           <div className="text-gray-600">Quantity: {quantity}</div>
           <div className="text-gray-600">Price: {price}</div>
         </div>
