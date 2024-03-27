@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FaArrowRight } from "react-icons/fa";
-import Image from "next/image"; // Import the Image component from next/image
+import Image from "next/image";
 
 const OrderConfirmed = () => {
   const router = useRouter();

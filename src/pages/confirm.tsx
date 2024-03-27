@@ -1,7 +1,6 @@
-import OrderConfirmed from "../components/Order/OrderConfirm";
+import OrderConfirmed from "../components/Order/OrderConfirmed";
 import OrderFailed from "../components/Order/OrderFailed";
 import React from "react";
-import {Header} from "../components/Common/Header";
 
 const Confirmation: React.FC = () => {
   const renderOrderConfirmed = () => {
@@ -14,11 +13,7 @@ const Confirmation: React.FC = () => {
     );
   };
 
-  return (
-    <div className="p-8">  
-      {renderOrderConfirmed()}
-    </div>
-  );
+  return <div className="p-8">{renderOrderConfirmed()}</div>;
 };
 
 export default Confirmation;

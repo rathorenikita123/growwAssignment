@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
@@ -24,7 +23,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
+const OrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   const router = useRouter();
   const [appliedCoupon, setAppliedCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -82,12 +81,8 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   }, []);
 
   return (
-    // i want background color to be blue of heading order summary
     <div className="flex flex-col space-y-8 rounded-lg w-full pb-4">
-      {/* <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg "> */}
       <h2 className="text-lg font-semibold text-black">Order Summary</h2>
-      {/* </div> */}
-
       <div className="space-y-7 w-full text-md">
         <OrderSummaryItem label="Subtotal" value={formatPrice(subTotal || 0)} />
         <div>
@@ -142,10 +137,6 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
             {formatPrice(discount)}
           </p>
         )}
-
-        {/* {appliedCoupon === "" && discount === 0 && (
-        <p className="mt-0 text-red-500">Please enter a valid coupon.</p>
-      )} */}
         <div className="flex justify-between">
           <p className="font-semibold text-lg">Total</p>
           {isCartEmpty ? (
@@ -155,7 +146,6 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
           )}
         </div>
       </div>
-
       <button
         className="bg-blue-500 text-white px-6 py-3 mb-6 w-full rounded-md flex items-center justify-center"
         disabled={isCartEmpty}
@@ -167,3 +157,5 @@ export const CartOrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
     </div>
   );
 };
+
+export default OrderSummary;

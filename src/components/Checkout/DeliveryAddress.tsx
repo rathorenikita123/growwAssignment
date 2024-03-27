@@ -1,10 +1,5 @@
 "use client";
-
 import React, { useState } from "react";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-import toast from "react-hot-toast";
-
 interface DeliveryAddressProps {
   onSubmit: () => void;
 }
@@ -33,8 +28,6 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
   return (
     <>
       <div className="flex flex-col space-y-8 h-100 w-full pb-4 pr-8">
-        {/* <div className="flex justify-center bg-blue-500 p-4 w-full rounded-t-lg "> */}
-        {/* </div> */}
         <h2 className="text-lg font-semibold text-black">
           Add Delivery Address
         </h2>
@@ -101,13 +94,6 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
               onChange={(e) => setZipCode(e.target.value)}
             />
           </label>
-          {/* <button
-          type="submit"
-          className="text-white px-6 py-3 bg-blue-500 rounded-md flex items-center justify-center 2"
-          onClick={handleSubmit}
-        >
-          Save Address
-        </button> */}
         </form>
       </div>
     </>

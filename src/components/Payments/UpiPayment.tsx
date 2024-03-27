@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-
 interface UpiInfo {
   upiId: string;
 }
@@ -39,8 +38,7 @@ const UpiPayment: React.FC = () => {
     if (errorsList.length > 0 || !formData.upiId) {
       console.log(errorsList);
     } else {
-      // Redirect to confirmation page with random status
-      router.push('/order-status');
+      router.push("/order-status");
     }
   };
 
@@ -67,11 +65,6 @@ const UpiPayment: React.FC = () => {
       [name]: validateUpiId(name, value),
     }));
   };
-
-  // Function to generate random status (success/fail)
-  // const getRandomValue = (): string => {
-  //   return Math.random() < 0.8 ? "success" : "fail";
-  // };
 
   return (
     <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">

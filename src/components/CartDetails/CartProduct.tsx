@@ -3,12 +3,10 @@
 import { FC } from "react";
 import useStore from "../../hooks/store";
 import Image from "next/image";
-import { FaTrash } from "react-icons/fa";
 
 export type CartItemProps = {
   id: number;
   title: string;
-  // description?: string;
   quantity: number;
   price: number;
   image: string;
@@ -17,7 +15,6 @@ export type CartItemProps = {
 const CartProduct: FC<CartItemProps> = ({
   id,
   title,
-  // description,
   quantity,
   price,
   image,
@@ -25,35 +22,6 @@ const CartProduct: FC<CartItemProps> = ({
   const removeItemFromCart = useStore((state) => state.removeItemFromCart);
 
   return (
-    // <div className="flex flex-col md:flex-row justify-between items-center">
-    //   <div className="flex items-center space-x-5 w-full">
-    //     <Image
-    //       className="rounded-lg"
-    //       src={image}
-    //       alt={title}
-    //       width={96}
-    //       height={96}
-    //     />
-    //     <div className="pt-4">
-    //       <div className="space-y-1">
-    //         <div className="font-medium">{title}</div>
-    //         <div className="text-sm text-gray-600">{description}</div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="hidden md:flex w-full justify-between ml-8">
-    //     <div className="flex items-center">
-    //       <div className="text-gray-600">Quantity: {quantity}</div>
-    //       <div className="text-gray-600">Price: {price}</div>
-    //     </div>
-    //     <button
-    //       className=" text-red-500"
-    //       onClick={() => removeItemFromCart(id)}
-    //     >
-    //       <FaTrash />
-    //     </button>
-    //   </div>
-    // </div>
     <div className="flex flex-col md:flex-row justify-between items-center border-b p-3">
       <div className="flex items-center space-x-5 w-full">
         <div className="border-2  rounded-lg overflow-hidden p-2">

@@ -1,0 +1,41 @@
+export const CardImages = [
+  {
+    id: 1,
+    src: "/card1.png",
+    alt: "card",
+  },
+  {
+    id: 2,
+    src: "/card2.png",
+    alt: "card",
+  },
+  {
+    id: 3,
+    src: "/card3.png",
+    alt: "card",
+  }
+];
+
+export const UpiImages = [
+  {
+    id: 1,
+    src: "/upi1.png",
+    alt: "upi",
+  },
+  {
+    id: 2,
+    src: "/upi2.png",
+    alt: "upi",
+  },
+  {
+    id: 3,
+    src: "/upi3.png",
+    alt: "upi",
+  },
+  {
+    id: 4,
+    src: "/upi4.png",
+    alt: "upi",
+  },
+];
+

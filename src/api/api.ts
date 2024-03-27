@@ -1,4 +1,4 @@
-const BASE_URL = 'https://groww-intern-assignment.vercel.app/v1/api';
+const BASE_URL = "https://groww-intern-assignment.vercel.app/v1/api";
 
 export const fetchOrderDetails = async () => {
   try {
@@ -12,7 +12,7 @@ export const fetchOrderDetails = async () => {
 
     return data;
   } catch (error) {
-    console.error('API request failed:', error);
-    throw error; 
+    console.error("API request failed:", error);
+    throw error;
   }
 };

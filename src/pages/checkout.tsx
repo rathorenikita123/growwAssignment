@@ -1,14 +1,12 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { calculateTotalValue } from "../utils/utils";
 import { FaArrowLeft } from "react-icons/fa";
-import { Loader } from "../components/Common/Loader";
+import Loader from "../components/Common/Loader";
 import DeliveryDetails from "../components/Checkout/DeliveryAddress";
-import { CartOrderSummary } from "../components/Common/OrderSummary";
+import OrderSummary from "../components/Common/OrderSummary";
 import OrderDetails from "../hooks/useOrderDetails";
 import useStore from "../hooks/store";
-// import { Header } from "@/src/components/header";
 
 const Checkout = () => {
   const router = useRouter();
@@ -17,7 +15,7 @@ const Checkout = () => {
   const subTotal = calculateTotalValue(useStore().cart);
 
   const handleBackToCart = () => {
-    router.back(); // Navigate back to the cart page
+    router.push("/cart");
   };
 
   if (loading) {
@@ -40,7 +38,7 @@ const Checkout = () => {
           </div>
           <div className="md:w-[40%] ml-4">
             <div className="flex justify-center md:justify-end mb-8">
-              <CartOrderSummary
+              <OrderSummary
                 subTotal={subTotal}
                 isCartEmpty={hookCart.cart.length > 0 ? false : true}
               />
