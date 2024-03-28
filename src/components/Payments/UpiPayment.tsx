@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-interface UpiInfo {
-  upiId: string;
-}
+import Toast from "../Toast/Toast";
+import { UpiInfo } from "../interfaces/interfaces";
 
 const UpiPayment: React.FC = () => {
   const router = useRouter();
@@ -10,6 +9,8 @@ const UpiPayment: React.FC = () => {
   const [formData, setFormData] = useState<UpiInfo>({
     upiId: "",
   });
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleUpiPayment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,9 +26,8 @@ const UpiPayment: React.FC = () => {
     }
 
     if (isEmptyField) {
-      alert(
-        "Please fill in all the information before proceeding with payment."
-      );
+      setToastMessage("Please fill in all fields");
+      setShowToast(true);
       return;
     }
     for (const [Key, value] of Object.entries(errors)) {
@@ -67,35 +67,40 @@ const UpiPayment: React.FC = () => {
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <form className="py-4 px-6" onSubmit={handleUpiPayment}>
-        <h2 className="text-center text-2xl font-semibold mb-3">
-          Pay using Credit/ Debit Card
-        </h2>
-        <div className="mb-8">
-          <label htmlFor="upiId" className="block text-sm font-semibold mb-1">
-            UPI ID
-          </label>
-          <input
-            type="text"
-            name="upiId"
-            value={formData.upiId}
-            onChange={handleInputChange}
-            placeholder="example@upi"
-            className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
-          />
-          {errors.upiId && (
-            <p className="text-red-500 text-xs mt-1">{errors.upiId}</p>
-          )}
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
-        >
-          Pay Now
-        </button>
-      </form>
-    </div>
+    <>
+      {showToast && (
+        <Toast message={toastMessage} onClose={() => setShowToast(false)} />
+      )}
+      <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <form className="py-4 px-6" onSubmit={handleUpiPayment}>
+          <h2 className="text-center text-lg font-semibold mb-3">
+            Pay using Credit/ Debit Card
+          </h2>
+          <div className="mb-8">
+            <label htmlFor="upiId" className="block text-sm font-semibold mb-1">
+              UPI ID
+            </label>
+            <input
+              type="text"
+              name="upiId"
+              value={formData.upiId}
+              onChange={handleInputChange}
+              placeholder="example@upi"
+              className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
+            />
+            {errors.upiId && (
+              <p className="text-red-500 text-xs mt-1">{errors.upiId}</p>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
+          >
+            Pay Now
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

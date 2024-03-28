@@ -1,21 +1,5 @@
 import { create } from "zustand";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-interface Store {
-  cart: Product[];
-  paymentMethods: string[];
-  setCart: (cart: Product[]) => void;
-  setPaymentMethods: (newPaymentMethods: string[]) => void;
-  removeItemFromCart: (id: number) => void;
-  emptyCart: () => void;
-}
+import { Product, Store } from "../components/interfaces/interfaces";
 
 const useStore = create<Store>((set) => ({
   cart: [],

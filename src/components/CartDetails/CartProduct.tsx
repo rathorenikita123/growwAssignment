@@ -3,22 +3,9 @@
 import { FC } from "react";
 import useStore from "../../hooks/store";
 import Image from "next/image";
+import { Product } from "../interfaces/interfaces";
 
-export type CartItemProps = {
-  id: number;
-  title: string;
-  quantity: number;
-  price: number;
-  image: string;
-};
-
-const CartProduct: FC<CartItemProps> = ({
-  id,
-  title,
-  quantity,
-  price,
-  image,
-}) => {
+const CartProduct: FC<Product> = ({ id, title, quantity, price, image }) => {
   const removeItemFromCart = useStore((state) => state.removeItemFromCart);
 
   return (

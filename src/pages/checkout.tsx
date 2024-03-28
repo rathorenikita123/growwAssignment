@@ -1,7 +1,8 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { calculateTotalValue } from "../utils/utils";
-import { FaArrowLeft } from "react-icons/fa";
+import { IoChevronBackOutline } from "react-icons/io5";
 import Loader from "../components/Common/Loader";
 import DeliveryDetails from "../components/Checkout/DeliveryAddress";
 import OrderSummary from "../components/Common/OrderSummary";
@@ -27,35 +28,34 @@ const Checkout = () => {
   }
 
   return (
-    <>
-      <hr className="w-100 h-5"></hr>
-      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="md:w-[60%] mr-4">
-            <div className="flex justify-center md:justify-start mb-8">
-              <DeliveryDetails onSubmit={() => console.log("Form submitted")} />
-            </div>
-          </div>
-          <div className="md:w-[40%] ml-4">
-            <div className="flex justify-center md:justify-end mb-8">
-              <OrderSummary
-                subTotal={subTotal}
-                isCartEmpty={hookCart.cart.length > 0 ? false : true}
-              />
-            </div>
+    <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
+      <div className="">
+        <button
+          className="pr-6 py-3 text-[#696b79] text-lg font-semibold rounded-md flex items-center justify-center"
+          onClick={handleBackToCart}
+        >
+          <IoChevronBackOutline className=" w-8 h-8 text-[#696b79]" />
+          Back
+        </button>
+      </div>
+      <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="md:w-[60%] mr-4">
+          <div className="flex justify-center md:justify-start mb-8">
+            <DeliveryDetails />
           </div>
         </div>
-        <div className="mt-6 font-semibold flex justify-center">
-          <button
-            className="text-white px-6 py-3 bg-blue-500 rounded-md flex items-center justify-center"
-            onClick={handleBackToCart}
-          >
-            <FaArrowLeft className="mr-4" />
-            Back to Cart
-          </button>
+        <div className="md:w-[40%] ml-4">
+          <div className="flex justify-center md:justify-end mb-8">
+            <OrderSummary
+              subTotal={subTotal}
+              isCartEmpty={hookCart.cart.length > 0 ? false : true}
+              context="checkout"
+              text="Order Summary"
+            />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,41 +1,35 @@
 export const CardImages = [
   {
     id: 1,
-    src: "/card1.png",
-    alt: "card",
+    src: "/images/card1.png",
+    alt: "visa",
   },
   {
     id: 2,
-    src: "/card2.png",
-    alt: "card",
+    src: "/images/card2.png",
+    alt: "mastercard",
   },
   {
     id: 3,
-    src: "/card3.png",
-    alt: "card",
-  }
+    src: "/images/card3.png",
+    alt: "maestro",
+  },
 ];
 
 export const UpiImages = [
   {
     id: 1,
-    src: "/upi1.png",
-    alt: "upi",
+    src: "/images/upi1.png",
+    alt: "google pay",
   },
   {
     id: 2,
-    src: "/upi2.png",
-    alt: "upi",
+    src: "/images/upi2.png",
+    alt: "phonepe",
   },
   {
     id: 3,
-    src: "/upi3.png",
-    alt: "upi",
-  },
-  {
-    id: 4,
-    src: "/upi4.png",
-    alt: "upi",
+    src: "/images/upi4.png",
+    alt: "paytm",
   },
 ];
-

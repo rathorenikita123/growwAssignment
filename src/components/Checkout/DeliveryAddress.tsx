@@ -1,38 +1,49 @@
 "use client";
 import React, { useState } from "react";
-interface DeliveryAddressProps {
-  onSubmit: () => void;
-}
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import Toast from "../Toast/Toast";
 
-const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
+const DeliveryAddress: React.FC = () => {
   const [fullName, setFullName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [toastMessage, setToastMessage] = useState(""); // State to manage toast message
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phoneNo || !address || !city || !state || !zipCode) {
-      alert("Please fill in all fields");
-
+      setToastMessage("Please fill in all fields");
+      setShowToast(true);
       return;
     }
 
-    alert("Address saved!");
-    console.log("Address saved!");
-    onSubmit();
+    setToastMessage("Address saved!");
+    setShowToast(true);
+
+    setFullName("");
+    setPhoneNo("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setZipCode("");
   };
 
   return (
     <>
-      <div className="flex flex-col space-y-8 h-100 w-full pb-4 pr-8">
-        <h2 className="text-lg font-semibold text-black">
-          Add Delivery Address
+      {showToast && (
+        <Toast message={toastMessage} onClose={() => setShowToast(false)} />
+      )}
+      <div className="flex flex-col space-y-8 h-100 w-full p-6 shadow-lg rounded-lg">
+        <h2 className="text-lg font-semibold text-black flex items-center">
+          Add Shipping Address
+          <HiOutlineLocationMarker className="ml-2" />
         </h2>
 
-        <form className="space-y-2 w-full text-sm">
+        <form className="space-y-2 w-full text-sm" onSubmit={handleSubmit}>
           <label className="flex flex-col gap-1">
             Name
             <input
@@ -94,6 +105,12 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ onSubmit }) => {
               onChange={(e) => setZipCode(e.target.value)}
             />
           </label>
+          <button
+            type="submit"
+            className="px-4 py-3 bg-blue-500 text-white rounded-md"
+          >
+            Save Address
+          </button>
         </form>
       </div>
     </>

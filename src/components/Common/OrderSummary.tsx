@@ -4,14 +4,7 @@ import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { formatPrice } from "../../utils/utils";
 import defaultTheme from "@/theme";
-
-type OrderSummaryItemProps = {
-  label: string;
-  value?: string;
-  children?: React.ReactNode;
-  subTotal?: number;
-  context?: "home" | "checkout" | "";
-};
+import { OrderSummaryItemProps } from "../interfaces/interfaces";
 
 const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   const { label, value, children } = props;
@@ -23,7 +16,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-const OrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
+const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
   const router = useRouter();
   const [appliedCoupon, setAppliedCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -55,16 +48,24 @@ const OrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   };
 
   const handleCheckout = () => {
-    if (context === "home") {
-      router.push("/checkout");
-    } else if (context === "checkout") {
-      router.push("/payment");
+    switch (context) {
+      case "home":
+        router.push("/checkout");
+        break;
+      case "checkout":
+        router.push("/payment");
+        break;
+      default:
+        break;
     }
   };
 
-  let buttonText = "Place Order";
+  let buttonText = "";
   if (context === "checkout") {
     buttonText = "Continue";
+  }
+  if (context === "home") {
+    buttonText = "Place Order";
   }
 
   let grandTotal = (subTotal || 0) - discount;
@@ -81,8 +82,8 @@ const OrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
   }, []);
 
   return (
-    <div className="flex flex-col space-y-8 rounded-lg w-full pb-4">
-      <h2 className="text-lg font-semibold text-black">Order Summary</h2>
+    <div className="flex flex-col space-y-8 rounded-lg w-full p-6 shadow-lg ">
+      <h2 className="text-lg font-semibold text-black">{text}</h2>
       <div className="space-y-7 w-full text-md">
         <OrderSummaryItem label="Subtotal" value={formatPrice(subTotal || 0)} />
         <div>
@@ -140,20 +141,22 @@ const OrderSummary = ({ subTotal, isCartEmpty, context }: any) => {
         <div className="flex justify-between">
           <p className="font-semibold text-lg">Total</p>
           {isCartEmpty ? (
-            <p className="font-bold text-red-500">Cart is Empty</p>
+            <p className="font-bold text-red-500">00.00</p>
           ) : (
             <p>{formatPrice(grandTotal)}</p>
           )}
         </div>
       </div>
-      <button
-        className="bg-blue-500 text-white px-6 py-3 mb-6 w-full rounded-md flex items-center justify-center"
-        disabled={isCartEmpty}
-        onClick={handleCheckout}
-      >
-        Payment
-        <FaArrowRight className="ml-2" />
-      </button>
+      {context !== "" && (
+        <button
+          className="text-white bg-blue-500 px-6 py-3 rounded-md flex items-center justify-center mt-4"
+          disabled={isCartEmpty}
+          onClick={handleCheckout}
+        >
+          {buttonText}
+          <FaArrowRight className="ml-2" />
+        </button>
+      )}
     </div>
   );
 };

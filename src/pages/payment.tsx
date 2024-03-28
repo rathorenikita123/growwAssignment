@@ -19,10 +19,13 @@ const PaymentPage = () => {
 
   return (
     <div>
-      <div className="flex justify-evenly p-12 w-full">
-        <div className="flex">
-          <div className="mb-4 flex flex-col">
-            <div className="flex flex-col border-b-2 text-xl">
+      <div className="flex flex-col lg:flex-row justify-center p-12 w-full">
+        <div className="w-3/5 flex lg:flex-row items-start justify-evenly ">
+          <div className="flex flex-col">
+            <div
+              className="flex flex-col items-start 
+            border-b-2 text-xl"
+            >
               <button
                 className={`p-2 focus:outline-none ${
                   selectedOption === "card"
@@ -42,18 +45,19 @@ const PaymentPage = () => {
                 Credit/Debit Card
               </button>
 
-              {CardImages.map((image) => (
-                <Image
-                  key={image.id}
-                  src={image.src}
-                  alt={image.alt}
-                  width={60}
-                  height={50}
-                  className="ml-2"
-                />
-              ))}
+              {selectedOption === "card" &&
+                CardImages.map((image) => (
+                  <Image
+                    key={image.id}
+                    src={image.src}
+                    alt={image.alt}
+                    width={50}
+                    height={50}
+                    className="m-2"
+                  />
+                ))}
             </div>
-            <div className="flex flex-col border-b-2 text-xl">
+            <div className="flex flex-col items-start border-b-2 text-xl">
               <button
                 className={`p-2 focus:outline-none ${
                   selectedOption === "upi"
@@ -72,28 +76,32 @@ const PaymentPage = () => {
                 />
                 UPI
               </button>
-              {UpiImages.map((image) => (
-                <Image
-                  key={image.id}
-                  src={image.src}
-                  alt={image.alt}
-                  width={60}
-                  height={50}
-                  className="ml-2"
-                />
-              ))}
+              {selectedOption === "upi" &&
+                UpiImages.map((item) => (
+                  <Image
+                    key={item.id}
+                    src={item.src}
+                    alt={item.alt}
+                    width={50}
+                    height={50}
+                    className="m-2"
+                  />
+                ))}
             </div>
           </div>
+
+          <div>
+            {selectedOption === "card" && <CardPayment />}
+            {selectedOption === "upi" && <UpiPayment />}
+          </div>
         </div>
-        <div>
-          {selectedOption === "card" && <CardPayment />}
-          {selectedOption === "upi" && <UpiPayment />}
-        </div>
-        <div className="flex justify-center md:justify-end mb-8 w-2/5">
+
+        <div className="flex justify-center w-2/5">
           <OrderSummary
             subTotal={subTotal}
             isCartEmpty={hookCart.cart.length > 0 ? false : true}
             context=""
+            text="Order Summary"
           />
         </div>
       </div>

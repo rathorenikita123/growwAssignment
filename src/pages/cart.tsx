@@ -28,7 +28,8 @@ const Cart: React.FC = () => {
   }
 
   return (
-    <div className="px-4 md:px-8 lg:px-12 py-6 md:py-8 lg:py-12 ">
+    // <div className="px-4 md:px-8 lg:px-12 py-6 md:py-8 lg:py-12 ">
+    <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
       <div className="">
         <button
           className="pr-6 py-3 text-[#696b79] text-lg font-semibold rounded-md flex items-center justify-center"
@@ -38,33 +39,37 @@ const Cart: React.FC = () => {
           Back
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {hookCart.cart.length > 0 ? (
-          <div className="border-2 rounded-lg">
-            <div className="bg-blue-500 p-4 rounded-t-lg">
-              <h2 className="text-2xl font-bold text-white">
-                My Cart ({hookCart.cart.length}{" "}
-                {hookCart.cart.length === 1 ? "Item" : "Items"})
-              </h2>
-            </div>
-            <div className="space-y-6">
-              {hookCart.cart.map((product) => (
-                <CartProduct key={product.id} {...product} />
-              ))}
-            </div>
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="md:w-[60%] mr-4 shadow-lg rounded-lg">
+          <div className="flex flex-col">
+            <h2 className="text-lg font-semibold text-black px-2">
+              My Cart ({hookCart.cart.length}{" "}
+              {hookCart.cart.length === 1 ? "Item" : "Items"})
+            </h2>
+            {hookCart.cart.length === 0 ? (
+              <EmptyCart />
+            ) : (
+              <div className="flex flex-col space-y-4">
+                {hookCart.cart.map((product) => (
+                  <CartProduct key={product.id} {...product} />
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <EmptyCart />
-        )}
-        {hookCart.cart.length > 0 && (
-          <div className="flex flex-col items-center">
-            <OrderSummary
-              subTotal={subTotal}
-              isCartEmpty={hookCart.cart.length === 0}
-              context="home"
-            />
-          </div>
-        )}
+        </div>
+
+        <div className="md:w-[40%] ml-4">
+          {hookCart.cart.length > 0 && (
+            <div className="flex flex-col items-center">
+              <OrderSummary
+                subTotal={subTotal}
+                isCartEmpty={hookCart.cart.length === 0}
+                context="home"
+                text="Cart Total"
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

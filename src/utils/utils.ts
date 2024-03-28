@@ -1,8 +1,4 @@
-interface Product {
-  id: number;
-  price: number;
-  quantity: number;
-}
+import { Product } from "../components/interfaces/interfaces";
 
 export function formatPrice(value: number): string {
   return value.toFixed(2);
@@ -13,4 +9,3 @@ export const calculateTotalValue = (cart: Product[]) => {
     0
   );
 };
-
