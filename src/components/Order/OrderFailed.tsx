@@ -31,7 +31,6 @@ const OrderFailed = () => {
         onClick={handleFailure}
       >
         Try again
-        {/* <FaArrowRight className="ml-2" /> */}
         <IoReload className="ml-2" />
       </button>
     </div>
