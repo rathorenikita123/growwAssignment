@@ -29,7 +29,7 @@ export const UpiImages = [
   },
   {
     id: 3,
-    src: "/images/upi4.png",
+    src: "/images/upi3.png",
     alt: "paytm",
   },
 ];

@@ -29,7 +29,7 @@ const OrderFailed = () => {
         className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center justify-center"
         onClick={handleFailure}
       >
-        Back to Payments
+        Try again
         <FaArrowRight className="ml-2" />
       </button>
     </div>

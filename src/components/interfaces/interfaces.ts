@@ -32,6 +32,8 @@ export interface Store {
   setCart: (cart: Product[]) => void;
   setPaymentMethods: (newPaymentMethods: string[]) => void;
   removeItemFromCart: (id: number) => void;
+  increaseQuantity: (id: number) => void;
+  decreaseQuantity: (id: number) => void;
   emptyCart: () => void;
 }
 

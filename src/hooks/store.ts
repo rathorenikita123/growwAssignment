@@ -20,6 +20,26 @@ const useStore = create<Store>((set) => ({
     });
   },
 
+  increaseQuantity: (id) => {
+    set((state) => ({
+      ...state,
+      cart: state.cart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    }));
+  },
+
+  decreaseQuantity: (id) => {
+    set((state) => ({
+      ...state,
+      cart: state.cart.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      ),
+    }));
+  },
+
   emptyCart: () => {
     set((state) => ({ ...state, cart: [] }));
   },

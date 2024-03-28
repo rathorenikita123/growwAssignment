@@ -42,7 +42,6 @@ const DeliveryAddress: React.FC = () => {
           Add Shipping Address
           <HiOutlineLocationMarker className="ml-2" />
         </h2>
-        {/* <div onSubmit={handleSubmit}> */}
         <form className="space-y-2 w-full text-sm">
           <label className="flex flex-col gap-1">
             Name
@@ -114,7 +113,6 @@ const DeliveryAddress: React.FC = () => {
           Save Address
         </button>
       </div>
-      {/* </div> */}
     </>
   );
 };

@@ -71,10 +71,10 @@ const UpiPayment: React.FC = () => {
       {showToast && (
         <Toast message={toastMessage} onClose={() => setShowToast(false)} />
       )}
-      <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="mx-auto bg-white shadow-lg rounded-lg w-[32rem]">
         <form className="py-4 px-6" onSubmit={handleUpiPayment}>
           <h2 className="text-center text-lg font-semibold mb-3">
-            Pay using Credit/ Debit Card
+            Pay using Upi
           </h2>
           <div className="mb-8">
             <label htmlFor="upiId" className="block text-sm font-semibold mb-1">

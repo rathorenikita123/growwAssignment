@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { formatPrice } from "../../utils/utils";
-import defaultTheme from "@/theme";
+import defaultTheme from "../../../defaultTheme";
 import { OrderSummaryItemProps } from "../interfaces/interfaces";
 
 const OrderSummaryItem = (props: OrderSummaryItemProps) => {
@@ -133,9 +133,8 @@ const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
           </div>
         )}
         {appliedCoupon && (
-          <p className="mt-0 text-green-500">
-            Coupon {appliedCoupon} applied successfully. You have saved{" "}
-            {formatPrice(discount)}
+          <p className="mt-0 text-green-500 border border-green-500 p-2 text-center">
+            You have saved {formatPrice(discount)}!!
           </p>
         )}
         <div className="flex justify-between">

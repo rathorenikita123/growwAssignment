@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { calculateTotalValue } from "../utils/utils";
 import { IoChevronBackOutline } from "react-icons/io5";
@@ -39,7 +38,7 @@ const Checkout = () => {
         </button>
       </div>
       <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
-        <div className="flex flex-col md:flex-row justify-between items-start">
+        <div className="flex flex-col md:flex-row justify-between items-center lg:items-start md:items-start">
           <div className="md:w-[60%] md:mr-4 sm:mr-0">
             <div className="flex justify-center md:justify-start mb-8">
               <DeliveryDetails />
@@ -56,7 +55,6 @@ const Checkout = () => {
               />
             </div>
           </div>
-          
         </div>
       </div>
     </>
