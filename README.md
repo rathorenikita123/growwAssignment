@@ -37,13 +37,13 @@ This project is a submission for the SDE Intern Assignment Round, focusing on bu
 
 ## Steps to Run the Code
 1. Clone the repository:
-```git clone <repository-url>
+```git clone <repository-url>```
 
 2. Install dependencies:
-```npm install
+```npm install```
 
 3. Start the development server:
-```npm run dev
+```npm run dev```
 
 4. Open your web browser and navigate to http://localhost:3000 to view the application.
 
