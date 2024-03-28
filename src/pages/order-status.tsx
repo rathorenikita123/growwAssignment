@@ -28,7 +28,11 @@ const CheckoutPage = () => {
               <p className="text-gray-400 mb-8">Check your items</p>
               <div className="space-y-4">
                 {cartItems.map((item: any) => (
-                  <CartProduct key={item.id} {...item} />
+                  <CartProduct
+                    key={item.id}
+                    {...item}
+                    showDeleteButton={!isOrderConfirmed}
+                  />
                 ))}
               </div>
             </div>

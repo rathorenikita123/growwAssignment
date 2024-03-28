@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const OrderConfirmed = () => {
   const router = useRouter();
@@ -30,8 +31,9 @@ const OrderConfirmed = () => {
         className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md flex items-center justify-center w-1/2"
         onClick={finishOrder}
       >
-        Finish Order
-        <FaArrowRight className="ml-2" />
+        <AiOutlineShoppingCart className="mr-4 w-4" />
+        Continue Shopping
+        {/* <FaArrowRight className="ml-2" /> */}
       </button>
     </div>
   );

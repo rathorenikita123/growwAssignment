@@ -15,7 +15,7 @@ export interface OrderDetails {
   paymentMethod: string[];
 }
 
-const OrderDetails = () => {
+const useOrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +50,7 @@ const OrderDetails = () => {
     fetchDetails();
   }, []);
 
-  return { loading: loading, error: error };
+  return { loading: loading, error: error, fetchDetails: fetchDetails };
 };
 
-export default OrderDetails;
+export default useOrderDetails;

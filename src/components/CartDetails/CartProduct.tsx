@@ -2,10 +2,17 @@
 import { FC } from "react";
 import useStore from "../../hooks/store";
 import Image from "next/image";
-import { Product } from "../interfaces/interfaces";
+import { CartProductProps } from "../interfaces/interfaces";
 import { AiFillDelete } from "react-icons/ai";
 
-const CartProduct: FC<Product> = ({ id, title, quantity, price, image }) => {
+const CartProduct: FC<CartProductProps> = ({
+  id,
+  title,
+  quantity,
+  price,
+  image,
+  showDeleteButton,
+}) => {
   const removeItemFromCart = useStore((state) => state.removeItemFromCart);
   const increaseQuantity = useStore((state) => state.increaseQuantity);
   const decreaseQuantity = useStore((state) => state.decreaseQuantity);
@@ -43,14 +50,16 @@ const CartProduct: FC<Product> = ({ id, title, quantity, price, image }) => {
           <div className="text-gray-600 text-lg">Price: {price}</div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <button
-          className="text-gray-600 hover:text-red-500 mt-4 md:mt-0 px-2 py-2 w-full text-xl"
-          onClick={() => removeItemFromCart(id)}
-        >
-          <AiFillDelete />
-        </button>
-      </div>
+      {showDeleteButton && (
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <button
+            className="text-gray-600 hover:text-red-500 mt-4 md:mt-0 px-2 py-2 w-full text-xl"
+            onClick={() => removeItemFromCart(id)}
+          >
+            <AiFillDelete />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

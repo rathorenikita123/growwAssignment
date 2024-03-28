@@ -11,7 +11,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({ onOrderConfirmation }) => {
     const randomValue = Math.random();
     const probabilityThreshold = 0.8;
     const isConfirmed = randomValue < probabilityThreshold;
-    if (typeof onOrderConfirmation === 'function') {
+    if (typeof onOrderConfirmation === "function") {
       onOrderConfirmation(isConfirmed);
     }
     return isConfirmed ? <OrderConfirmed /> : <OrderFailed />;

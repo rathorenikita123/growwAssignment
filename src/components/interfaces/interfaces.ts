@@ -7,6 +7,14 @@ export interface OrderSummaryItemProps {
   text?: string;
 }
 
+export interface CartProductProps {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+  showDeleteButton?: boolean;
+}
 export interface CardInfo {
   nameOnCard: string;
   cardNumber: string;

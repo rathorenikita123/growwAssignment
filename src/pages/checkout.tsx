@@ -8,11 +8,15 @@ import OrderSummary from "../components/Common/OrderSummary";
 import OrderDetails from "../hooks/useOrderDetails";
 import useStore from "../hooks/store";
 
+
 const Checkout = () => {
   const router = useRouter();
   const { loading, error } = OrderDetails();
   const hookCart = useStore();
   const subTotal = calculateTotalValue(useStore().cart);
+
+ 
+
 
   const handleBackToCart = () => {
     router.push("/cart");
@@ -50,7 +54,7 @@ const Checkout = () => {
               <OrderSummary
                 subTotal={subTotal}
                 isCartEmpty={hookCart.cart.length > 0 ? false : true}
-                context="checkout"
+                context=""
                 text="Order Summary"
               />
             </div>

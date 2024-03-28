@@ -1,6 +1,17 @@
 import { create } from "zustand";
 import { Product, Store } from "../components/interfaces/interfaces";
 
+interface DeliveryAddress {
+  address: string;
+  city: string;
+  // Add other fields as needed
+}
+
+interface DeliveryAddressStore {
+  deliveryAddress: DeliveryAddress | null;
+  setDeliveryAddress: (address: DeliveryAddress) => void;
+}
+
 const useStore = create<Store>((set) => ({
   cart: [],
   paymentMethods: [],
@@ -16,6 +27,7 @@ const useStore = create<Store>((set) => ({
   removeItemFromCart: (id) => {
     set((state) => {
       const newData = state.cart.filter((item) => item.id !== id);
+      localStorage.setItem("cartItems", JSON.stringify(newData));
       return { ...state, cart: newData };
     });
   },
@@ -46,3 +58,8 @@ const useStore = create<Store>((set) => ({
 }));
 
 export default useStore;
+
+export const useDeliveryAddressStore = create<DeliveryAddressStore>((set) => ({
+  deliveryAddress: null,
+  setDeliveryAddress: (address) => set({ deliveryAddress: address }),
+}));

@@ -17,6 +17,7 @@ const CardPayment: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -96,6 +97,7 @@ const CardPayment: React.FC = () => {
             <input
               type="text"
               name="cardNumber"
+              maxLength={16}
               value={formData.cardNumber}
               onChange={handleInputChange}
               placeholder="Card Number"
@@ -140,14 +142,15 @@ const CardPayment: React.FC = () => {
                 value={formData.cvv}
                 onChange={handleInputChange}
                 placeholder="CVV"
+                maxLength={3}
                 className="px-2 py-2 w-full border-2 border-[#f1f1f1] focus-visible:outline-none focus-visible:ring-1 "
               />
+              {errors.cvv && (
+                <div className="text-xs text-red-600">{errors.cvv}</div>
+              )}
             </div>
           </div>
 
-          {errors.cvv && (
-            <div className="text-xs text-red-600">{errors.cvv}</div>
-          )}
           <button
             type="submit"
             className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"

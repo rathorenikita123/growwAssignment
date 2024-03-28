@@ -2,12 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaShieldAlt } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+
   return (
     <header className="p-4 border-b-2 shadow-md">
       <div className="flex flex-col md:flex-row md:items-center justify-between sm:items-center items-center">
-        <div className="md:w-auto mb-4 md:mb-0 sm:items-center md:items-center">
+        <div className="md:w-auto mb-4 md:mb-0 sm:items-center md:items-center cursor-pointer">
           <Image
             src="https://groww.in/groww-logo-270.png"
             alt="groww image"
@@ -17,8 +20,10 @@ const Header = () => {
         </div>
         <div className="ml-8 flex">
           <Link
-            href="/"
-            className="text-[#696b79] lg:lg:text-xl flex items-center text-sm"
+            href=""
+            className={`${
+              router.pathname === "/cart" ? "text-blue-500" : "text-[#696b79]"
+            } lg:lg:text-xl flex items-center text-sm`}
           >
             BAG
             <Image
@@ -30,8 +35,12 @@ const Header = () => {
             />
           </Link>
           <Link
-            href="/checkout"
-            className="text-[#696b79] lg:text-xl flex items-center text-sm"
+            href=""
+            className={`${
+              router.pathname === "/checkout"
+                ? "text-blue-500"
+                : "text-[#696b79]"
+            } lg:text-xl flex items-center text-sm`}
           >
             ADDRESS
             <Image
@@ -42,8 +51,12 @@ const Header = () => {
             />
           </Link>
           <Link
-            href="/payment"
-            className="text-[#696b79] lg:text-xl flex items-center text-sm"
+            href=""
+            className={`${
+              router.pathname === "/payment"
+                ? "text-blue-500"
+                : "text-[#696b79]"
+            } lg:text-xl flex items-center text-sm`}
           >
             PAYMENT
           </Link>

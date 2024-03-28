@@ -16,9 +16,9 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
+const OrderSummary = ({ subTotal, isCartEmpty, context, text}: any) => {
   const router = useRouter();
-  const [appliedCoupon, setAppliedCoupon] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState<string>("");
   const [isCouponCodeVisible, setIsCouponCodeVisible] =
@@ -28,9 +28,9 @@ const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
   const applyCoupon = (code: string) => {
     let appliedDiscount = 0;
 
-    if (code === "GROWW10") {
+    if (code === "DISCOUNT10") {
       appliedDiscount = 10;
-      setAppliedCoupon("GROWW10");
+      setAppliedCoupon("DISCOUNT10");
     } else {
       setAppliedCoupon("");
       setDiscount(0);
@@ -47,6 +47,12 @@ const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
     setIsCouponCodeVisible(!isCouponCodeVisible);
   };
 
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setDiscount(0);
+    setCouponCode("");
+  };
+
   const handleCheckout = () => {
     switch (context) {
       case "home":
@@ -61,11 +67,8 @@ const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
   };
 
   let buttonText = "";
-  if (context === "checkout") {
-    buttonText = "Continue";
-  }
   if (context === "home") {
-    buttonText = "Place Order";
+    buttonText = "Continue";
   }
 
   let grandTotal = (subTotal || 0) - discount;
@@ -108,18 +111,30 @@ const OrderSummary = ({ subTotal, isCartEmpty, context, text }: any) => {
           </OrderSummaryItem>
         </div>
         <OrderSummaryItem label="Coupon Code">
-          <a
-            onClick={!isCartEmpty ? handleShowCouponCode : undefined}
-            className={`text-${primary}-500 underline cursor-pointer`}
-          >
-            Apply coupon code
-          </a>
+          {!isCartEmpty && !appliedCoupon && (
+            <a
+              onClick={handleShowCouponCode}
+              className={`text-${primary}-500 underline cursor-pointer`}
+            >
+              Apply coupon code
+            </a>
+          )}
+          {appliedCoupon && (
+            <>
+              <button
+                onClick={removeCoupon}
+                className={`text-${primary}-500 underline cursor-pointer ml-2`}
+              >
+                Remove
+              </button>
+            </>
+          )}
         </OrderSummaryItem>
         {isCouponCodeVisible && (
           <div className="flex flex-row items-center justify-between w-100">
             <input
               type="text"
-              placeholder="Enter Coupon Code GROWW10 for 10% discount"
+              placeholder="Enter Coupon Code DISCOUNT10 for 10% discount"
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
               className="border px-2 py-2 w-80 mr-2 text-[10px]"

@@ -14,12 +14,12 @@ const defaultTheme: ColorObject = {
   background: "#f0f0f0",
 };
 
-export const darkTheme: ColorObject = {
-  primary: "red",
-  secondary: "#ffffff",
-  accent: "#ff0000",
-  background: "red",
-};
+// export const darkTheme: ColorObject = {
+//   primary: "red",
+//   secondary: "#ffffff",
+//   accent: "#ff0000",
+//   background: "red",
+// };
 
 
 const fetchColorsFromAPI = async (): Promise<void> => {
@@ -38,6 +38,7 @@ const fetchColorsFromAPI = async (): Promise<void> => {
         accent: data.theme["--primary-foreground"], // Assuming primary foreground color as accent
         background: data.theme["--background"],
       };
+      console.log(colors, "colors");
 
       // Assign theme colors to defaultTheme object
       Object.assign(defaultTheme, colors);

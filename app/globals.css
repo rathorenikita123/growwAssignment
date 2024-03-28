@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #f9f9f9;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: --var(color-bg);
+}
