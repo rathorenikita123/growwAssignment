@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import useStore from "./store";
 import { fetchOrderDetails } from "../api/api";
-// import { OrderDetails } from "../components/interfaces/interfaces";
 
 export interface OrderDetails {
   products: {

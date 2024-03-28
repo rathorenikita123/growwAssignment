@@ -33,7 +33,6 @@ const OrderConfirmed = () => {
       >
         <AiOutlineShoppingCart className="mr-4 w-4" />
         Continue Shopping
-        {/* <FaArrowRight className="ml-2" /> */}
       </button>
     </div>
   );

@@ -44,5 +44,3 @@ export interface Store {
   decreaseQuantity: (id: number) => void;
   emptyCart: () => void;
 }
-
-

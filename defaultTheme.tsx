@@ -1,4 +1,3 @@
-
 type ColorObject = {
   primary: string;
   secondary: string;
@@ -14,33 +13,21 @@ const defaultTheme: ColorObject = {
   background: "#f0f0f0",
 };
 
-// export const darkTheme: ColorObject = {
-//   primary: "red",
-//   secondary: "#ffffff",
-//   accent: "#ff0000",
-//   background: "red",
-// };
-
-
 const fetchColorsFromAPI = async (): Promise<void> => {
   try {
     const response = await fetch(
       "https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata"
     );
     const data = await response.json();
-    console.log(data);
 
     if (data && data.theme) {
-      // Extract theme colors from the API response
       const colors = {
         primary: data.theme["--primary"],
-        secondary: data.theme["--foreground"], // Assuming foreground color as secondary
-        accent: data.theme["--primary-foreground"], // Assuming primary foreground color as accent
+        secondary: data.theme["--foreground"],
+        accent: data.theme["--primary-foreground"],
         background: data.theme["--background"],
       };
-      console.log(colors, "colors");
 
-      // Assign theme colors to defaultTheme object
       Object.assign(defaultTheme, colors);
     }
   } catch (error) {

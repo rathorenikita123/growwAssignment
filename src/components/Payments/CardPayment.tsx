@@ -14,6 +14,8 @@ const CardPayment: React.FC = () => {
   });
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("success");
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -63,6 +65,7 @@ const CardPayment: React.FC = () => {
 
     if (isEmptyField) {
       setToastMessage("Please fill in all fields");
+      setToastType("error");
       setShowToast(true);
       return;
     }
@@ -74,6 +77,7 @@ const CardPayment: React.FC = () => {
 
     if (errorsList.length === 0) {
       setToastMessage("Payment successful!");
+      setToastType("success");
       setShowToast(true);
       router.push("/order-status");
     } else {
@@ -86,7 +90,7 @@ const CardPayment: React.FC = () => {
   return (
     <>
       {showToast && (
-        <Toast message={toastMessage} onClose={() => setShowToast(false)} />
+        <Toast message={toastMessage} onClose={() => setShowToast(false)} type={toastType} />
       )}
       <div className=" mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <form className="py-4 px-6" onSubmit={handlePayment}>

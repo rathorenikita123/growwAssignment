@@ -6,9 +6,7 @@ import Loader from "../components/Common/Loader";
 import CartProduct from "../components/CartDetails/CartProduct";
 import OrderSummary from "../components/Common/OrderSummary";
 import { calculateTotalValue } from "../utils/utils";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoReload } from "react-icons/io5";
-// import { fetchOrderDetails } from "../api/api";
 
 const Cart: React.FC = () => {
   const { loading, error, fetchDetails } = useOrderDetails();
@@ -43,7 +41,6 @@ const Cart: React.FC = () => {
   useEffect(() => {
     if (theme) {
       Object.entries(theme).forEach(([key, value]) => {
-        // document.documentElement.style.setProperty(key, value ?? "");
         document.documentElement.style.setProperty(key, value as string);
       });
     }
@@ -79,7 +76,11 @@ const Cart: React.FC = () => {
                 </h2>
                 <div className="flex flex-col space-y-4">
                   {hookCart.cart.map((product) => (
-                    <CartProduct key={product.id} {...product} />
+                    <CartProduct
+                      key={product.id}
+                      {...product}
+                      showDeleteButton
+                    />
                   ))}
                 </div>
               </div>

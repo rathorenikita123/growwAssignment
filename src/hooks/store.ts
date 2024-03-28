@@ -2,9 +2,12 @@ import { create } from "zustand";
 import { Product, Store } from "../components/interfaces/interfaces";
 
 interface DeliveryAddress {
+  fullName: string;
+  phoneNo: string;
   address: string;
   city: string;
-  // Add other fields as needed
+  state: string;
+  zipCode: string;
 }
 
 interface DeliveryAddressStore {

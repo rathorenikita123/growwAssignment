@@ -64,6 +64,7 @@ const DeliveryAddress: React.FC = () => {
 
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("success");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,6 +79,7 @@ const DeliveryAddress: React.FC = () => {
     }
 
     if (isEmptyField) {
+      setToastType("error");
       setToastMessage("Please fill all the fields");
       setShowToast(true);
       return;
@@ -92,6 +94,7 @@ const DeliveryAddress: React.FC = () => {
     if (errorList.length === 0) {
       setDeliveryAddress(formData);
       localStorage.setItem("deliveryAddress", JSON.stringify(formData));
+      setToastType("success");
       setToastMessage("Address saved successfully");
       setShowToast(true);
       router.push("/payment");
@@ -111,7 +114,7 @@ const DeliveryAddress: React.FC = () => {
   return (
     <>
       {showToast && (
-        <Toast message={toastMessage} onClose={() => setShowToast(false)} />
+        <Toast message={toastMessage} onClose={() => setShowToast(false)} type={toastType} />
       )}
       <div className="flex flex-col space-y-8 w-full p-6 shadow-lg rounded-lg">
         <h2 className="text-lg font-semibold text-black flex items-center">

@@ -11,6 +11,7 @@ const UpiPayment: React.FC = () => {
   });
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("success");
 
   const handleUpiPayment = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ const UpiPayment: React.FC = () => {
 
     if (isEmptyField) {
       setToastMessage("Please fill in all fields");
+      setToastType("error");
       setShowToast(true);
       return;
     }
@@ -38,6 +40,9 @@ const UpiPayment: React.FC = () => {
     if (errorsList.length > 0 || !formData.upiId) {
       console.log(errorsList);
     } else {
+      setToastMessage("Payment successful!");
+      setToastType("success");
+      setShowToast(true);
       router.push("/order-status");
     }
   };
@@ -50,7 +55,6 @@ const UpiPayment: React.FC = () => {
       if (value.length === 0) {
         return "UPI ID is required";
       } else if (!/^[0-9A-Za-z.-]{2,256}@[A-Za-z]{2,64}$/.test(value)) {
-        console.log(value, "value");
         return "Invalid UPI ID format";
       }
     }
@@ -69,7 +73,11 @@ const UpiPayment: React.FC = () => {
   return (
     <>
       {showToast && (
-        <Toast message={toastMessage} onClose={() => setShowToast(false)} />
+        <Toast
+          message={toastMessage}
+          onClose={() => setShowToast(false)}
+          type={toastType}
+        />
       )}
       <div className="mx-auto bg-white shadow-lg rounded-lg w-[32rem]">
         <form className="py-4 px-6" onSubmit={handleUpiPayment}>

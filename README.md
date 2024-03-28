@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# InstaPayments - SDE Intern Assignment Round
 
-## Getting Started
+## Overview
+This project is a submission for the SDE Intern Assignment Round, focusing on building a user-friendly and responsive checkout experience using Next.js. The assignment involves implementing the final three steps of the online shopping flow: Checkout Page, Payment Options Page, and Order Confirmation Page.
 
-First, run the development server:
+## Features Implemented
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Checkout Page
+- Fetches cart items and payment methods from the provided API.
+- Displays an order summary section with the total amount and a call-to-action button to proceed.
+- Handles empty product list scenarios.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Payment Options Page
+- Allows users to choose their preferred payment method.
+- Renders visually distinct representations for each payment method.
+- Implements validation and error handling for seamless user interactions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Order Confirmation Page
+- Displays order details and a status message indicating the success or failure of the transaction.
+- Incorporates randomized order states such as Success, Failure, and Pending.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Caching
+- Implemented local API caching as per necessity.
 
-## Learn More
+### Interactive Elements
+- Created a responsive and dynamic user interface with smooth transitions and animations.
 
-To learn more about Next.js, take a look at the following resources:
+### Validation
+- Ensured proper form validation on each page to handle user input errors.
+- Validated payment information according to the selected payment method.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## API Used
+- [Merchant Metadata API](https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata): Provides the name, logo, and theme colors of the brand.
+- [Order Detail API](https://groww-intern-assignment.vercel.app/v1/api/order-details): Provides the product details and payment details.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Steps to Run the Code
+1. Clone the repository:
+```git clone <repository-url>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Install dependencies:
+```npm install
+
+3. Start the development server:
+```npm run dev
+
+4. Open your web browser and navigate to http://localhost:3000 to view the application.
+
+Feel free to explore the live demo and the code repository.
+
+
