@@ -5,7 +5,7 @@ import { FaShieldAlt } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="p-3 border-b-2">
+    <header className="p-4 border-b-2">
       <div className="flex flex-col md:flex-row md:items-center justify-between sm:items-center items-center">
         <div className="md:w-auto mb-4 md:mb-0 sm:items-center md:items-center">
           <Image
@@ -22,7 +22,7 @@ const Header = () => {
           >
             BAG
             <Image
-              src="/arrow.png"
+              src="/images/arrow.png"
               alt="arrow"
               width={100}
               height={50}
@@ -34,7 +34,12 @@ const Header = () => {
             className="text-[#696b79] lg:text-xl flex items-center text-sm"
           >
             ADDRESS
-            <Image src="/arrow.png" alt="arrow" width={100} height={50} />
+            <Image
+              src="/images/arrow.png"
+              alt="arrow"
+              width={100}
+              height={50}
+            />
           </Link>
           <Link
             href="/payment"

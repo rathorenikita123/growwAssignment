@@ -10,7 +10,7 @@ const DeliveryAddress: React.FC = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [toastMessage, setToastMessage] = useState(""); // State to manage toast message
+  const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,13 +37,13 @@ const DeliveryAddress: React.FC = () => {
       {showToast && (
         <Toast message={toastMessage} onClose={() => setShowToast(false)} />
       )}
-      <div className="flex flex-col space-y-8 h-100 w-full p-6 shadow-lg rounded-lg">
+      <div className="flex flex-col space-y-8 w-full p-6 shadow-lg rounded-lg">
         <h2 className="text-lg font-semibold text-black flex items-center">
           Add Shipping Address
           <HiOutlineLocationMarker className="ml-2" />
         </h2>
-
-        <form className="space-y-2 w-full text-sm" onSubmit={handleSubmit}>
+        {/* <div onSubmit={handleSubmit}> */}
+        <form className="space-y-2 w-full text-sm">
           <label className="flex flex-col gap-1">
             Name
             <input
@@ -105,14 +105,16 @@ const DeliveryAddress: React.FC = () => {
               onChange={(e) => setZipCode(e.target.value)}
             />
           </label>
-          <button
-            type="submit"
-            className="px-4 py-3 bg-blue-500 text-white rounded-md"
-          >
-            Save Address
-          </button>
         </form>
+        <button
+          type="submit"
+          className="px-6 py-3 bg-blue-500 text-white rounded-md w-full mt-8"
+          onClick={handleSubmit}
+        >
+          Save Address
+        </button>
       </div>
+      {/* </div> */}
     </>
   );
 };

@@ -19,13 +19,12 @@ const PaymentPage = () => {
 
   return (
     <div>
-      <div className="flex flex-col lg:flex-row justify-center p-12 w-full">
-        <div className="w-3/5 flex lg:flex-row items-start justify-evenly ">
-          <div className="flex flex-col">
-            <div
-              className="flex flex-col items-start 
-            border-b-2 text-xl"
-            >
+      {/* <div className="flex flex-col lg:flex-row justify-center p-12 w-full"> */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-6 md:py-6 lg:py-8">
+        <div className="flex flex-col md:flex-row justify-between items-start">
+          <div className="md:w-[60%] md:mr-4 sm:mr-0">
+            <div className="flex flex-col items-start border-b-2 text-xl">
+              {/* <div className="flex"> */}
               <button
                 className={`p-2 focus:outline-none ${
                   selectedOption === "card"
@@ -44,18 +43,21 @@ const PaymentPage = () => {
                 />
                 Credit/Debit Card
               </button>
+              {/* </div> */}
 
-              {selectedOption === "card" &&
-                CardImages.map((image) => (
-                  <Image
-                    key={image.id}
-                    src={image.src}
-                    alt={image.alt}
-                    width={50}
-                    height={50}
-                    className="m-2"
-                  />
-                ))}
+              <div>
+                {selectedOption === "card" &&
+                  CardImages.map((image) => (
+                    <Image
+                      key={image.id}
+                      src={image.src}
+                      alt={image.alt}
+                      width={50}
+                      height={50}
+                      className="m-2"
+                    />
+                  ))}
+              </div>
             </div>
             <div className="flex flex-col items-start border-b-2 text-xl">
               <button
@@ -88,21 +90,22 @@ const PaymentPage = () => {
                   />
                 ))}
             </div>
+            <div>
+              {selectedOption === "card" && <CardPayment />}
+              {selectedOption === "upi" && <UpiPayment />}
+            </div>
           </div>
 
-          <div>
-            {selectedOption === "card" && <CardPayment />}
-            {selectedOption === "upi" && <UpiPayment />}
+          <div className="md:w-[40%] md:ml-4 sm:ml-0 ">
+            <div className="flex justify-center md:justify-end mb-8">
+              <OrderSummary
+                subTotal={subTotal}
+                isCartEmpty={hookCart.cart.length > 0 ? false : true}
+                context=""
+                text="Order Summary"
+              />
+            </div>
           </div>
-        </div>
-
-        <div className="flex justify-center w-2/5">
-          <OrderSummary
-            subTotal={subTotal}
-            isCartEmpty={hookCart.cart.length > 0 ? false : true}
-            context=""
-            text="Order Summary"
-          />
         </div>
       </div>
     </div>

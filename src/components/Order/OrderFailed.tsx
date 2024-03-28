@@ -12,7 +12,7 @@ const OrderFailed = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <Image
-        src="/orderFail.png"
+        src="/images/orderFail.png"
         alt="orderFail"
         className="rounded-full"
         width={500}

@@ -4,7 +4,6 @@ import useStore from "./store";
 import { fetchOrderDetails } from "../api/api";
 import { OrderDetails } from "../components/interfaces/interfaces";
 
-
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

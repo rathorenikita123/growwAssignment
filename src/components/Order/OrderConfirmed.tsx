@@ -13,7 +13,7 @@ const OrderConfirmed = () => {
   return (
     <div className="flex flex-col items-center justify-start">
       <Image
-        src="/orderConfirm.png"
+        src="/images/orderConfirm.png"
         alt="orderConfirm"
         className="rounded-full"
         width={500}

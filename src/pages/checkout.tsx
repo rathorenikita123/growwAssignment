@@ -28,34 +28,38 @@ const Checkout = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
+    <>
       <div className="">
         <button
-          className="pr-6 py-3 text-[#696b79] text-lg font-semibold rounded-md flex items-center justify-center"
+          className="px-6 py-3 text-[#696b79] text-lg font-semibold rounded-md flex items-center justify-center"
           onClick={handleBackToCart}
         >
           <IoChevronBackOutline className=" w-8 h-8 text-[#696b79]" />
           Back
         </button>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="md:w-[60%] mr-4">
-          <div className="flex justify-center md:justify-start mb-8">
-            <DeliveryDetails />
+      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-8 py-4 md:py-6 lg:py-8">
+        <div className="flex flex-col md:flex-row justify-between items-start">
+          <div className="md:w-[60%] md:mr-4 sm:mr-0">
+            <div className="flex justify-center md:justify-start mb-8">
+              <DeliveryDetails />
+            </div>
           </div>
-        </div>
-        <div className="md:w-[40%] ml-4">
-          <div className="flex justify-center md:justify-end mb-8">
-            <OrderSummary
-              subTotal={subTotal}
-              isCartEmpty={hookCart.cart.length > 0 ? false : true}
-              context="checkout"
-              text="Order Summary"
-            />
+
+          <div className="md:w-[40%] md:ml-4 sm:ml-0 ">
+            <div className="flex justify-center md:justify-end mb-8">
+              <OrderSummary
+                subTotal={subTotal}
+                isCartEmpty={hookCart.cart.length > 0 ? false : true}
+                context="checkout"
+                text="Order Summary"
+              />
+            </div>
           </div>
+          
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

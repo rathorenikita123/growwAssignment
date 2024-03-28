@@ -12,7 +12,7 @@ const CardPayment: React.FC = () => {
     validThru: "",
     cvv: "",
   });
-  const [toastMessage, setToastMessage] = useState(""); // State to manage toast message
+  const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
