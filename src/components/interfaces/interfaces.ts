@@ -35,13 +35,4 @@ export interface Store {
   emptyCart: () => void;
 }
 
-export interface OrderDetails {
-  products: {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
-    image: string;
-  }[];
-  paymentMethod: string[];
-}
+

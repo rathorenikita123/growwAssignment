@@ -2,7 +2,18 @@
 import { useEffect, useState } from "react";
 import useStore from "./store";
 import { fetchOrderDetails } from "../api/api";
-import { OrderDetails } from "../components/interfaces/interfaces";
+// import { OrderDetails } from "../components/interfaces/interfaces";
+
+export interface OrderDetails {
+  products: {
+    id: number;
+    title: string;
+    price: number;
+    quantity: number;
+    image: string;
+  }[];
+  paymentMethod: string[];
+}
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
