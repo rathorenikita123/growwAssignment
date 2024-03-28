@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
+import { IoReload } from "react-icons/io5";
 
 const OrderFailed = () => {
   const router = useRouter();
@@ -26,11 +27,12 @@ const OrderFailed = () => {
         our Customer Care.
       </p>
       <button
-        className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center justify-center"
+        className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg flex items-center justify-center"
         onClick={handleFailure}
       >
         Try again
-        <FaArrowRight className="ml-2" />
+        {/* <FaArrowRight className="ml-2" /> */}
+        <IoReload className="ml-2" />
       </button>
     </div>
   );

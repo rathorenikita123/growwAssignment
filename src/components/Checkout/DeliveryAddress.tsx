@@ -23,13 +23,6 @@ const DeliveryAddress: React.FC = () => {
 
     setToastMessage("Address saved!");
     setShowToast(true);
-
-    setFullName("");
-    setPhoneNo("");
-    setAddress("");
-    setCity("");
-    setState("");
-    setZipCode("");
   };
 
   return (

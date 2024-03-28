@@ -27,7 +27,7 @@ const OrderConfirmed = () => {
         purchase order.
       </p>
       <button
-        className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center justify-center w-1/2"
+        className="mt-6 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md flex items-center justify-center w-1/2"
         onClick={finishOrder}
       >
         Finish Order
